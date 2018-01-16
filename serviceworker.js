@@ -21,8 +21,7 @@ self.addEventListener('install', function (event) {
                     '/img',
                     '/css/styles.css',
                     '/js/dbhelper.js',
-                    '/js/main.js',
-                    '/data/restaurants.json'
+                    '/js/main.js'
                 ]
             );
         })
