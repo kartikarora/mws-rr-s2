@@ -1,3 +1,9 @@
+let allRestaurants;
+
+window.onload = function () {
+    storeInDB(allRestaurants);
+};
+
 /**
  * Common database helper functions.
  */
@@ -21,11 +27,13 @@ class DBHelper {
         xhr.onload = () => {
             if (xhr.status === 200 || xhr.status === 201) { // Got a success response from server!
                 const json = JSON.parse(xhr.responseText);
-                const restaurants = json;
-                callback(null, restaurants);
+                allRestaurants = json;
+                callback(null, json);
             } else { // Oops!. Got an error from server.
                 const error = (`Request failed. Returned status of ${xhr.status}`);
-                callback(error, null);
+                // callback(error, null);
+                const json = fetchFromDb();
+                callback(null, json);
             }
         };
         xhr.send();
@@ -42,15 +50,16 @@ class DBHelper {
         xhr.onload = () => {
             if (xhr.status === 200 || xhr.status === 201) { // Got a success response from server!
                 const json = JSON.parse(xhr.responseText);
-                const restaurant = json;
                 if (restaurant) { // Got the restaurant
-                    callback(null, restaurant);
+                    callback(null, json);
                 } else { // Restaurant does not exist in the database
                     callback('Restaurant does not exist', null);
                 }
             } else { // Oops!. Got an error from server.
                 const error = (`Request failed. Returned status of ${xhr.status}`);
-                callback(error, null);
+                // callback(error, null);
+                const json = fetchFromDbById(id);
+                callback(null, json);
             }
         };
         xhr.send();

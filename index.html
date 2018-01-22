@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width,inital-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css"/>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f18200">
     <title>Restaurant Reviews</title>
 </head>
 
 <body>
 <header>
     <nav aria-label="Breadcrumb">
-        <h1><a href="/" tabindex="1">Restaurant Reviews</a></h1>
+        <h1><a href="/" tabindex="0">Restaurant Reviews</a></h1>
     </nav>
 </header>
 
 <main id="maincontent">
-    <section aria-labelledby="Area on Map" tabindex="2">
+    <label id="label-map" for="map" hidden>Area Map</label>
+    <section aria-labelledby="label-map" tabindex="0">
         <div id="map" role="application"></div>
     </section>
     <section>
         <div class="filter-options">
-            <h2>Filter Results</h2>
-            <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" tabindex="3"
-                    aria-labelledby="Select Neighborhood">
+            <h2 id="filter">Filter Results</h2>
+            <label id="label-neighborhoods-select" for="neighborhoods-select" hidden>Select Neighborhood</label>
+            <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" tabindex="0"
+                    aria-labelledby="label-neighborhoods-select">
                 <option value="all">All Neighborhoods</option>
             </select>
-            <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" tabindex="3"
-                    aria-labelledby="Select Cuisines">
+            <label id="label-cuisines-select" for="cuisines-select" hidden>Select Cuisine</label>
+            <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" tabindex="0"
+                    aria-labelledby="label-cuisines-select">
                 <option value="all">All Cuisines</option>
             </select>
         </div>
@@ -35,6 +40,7 @@
     </section>
 </main>
 
+<script type="application/javascript" charset="utf-8" src="js/indexdbhelper.js"></script>
 <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
 <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
 <script async defer
