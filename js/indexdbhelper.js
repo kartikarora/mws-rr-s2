@@ -33,9 +33,11 @@ storeInDB = (restaurants) => {
 
     var objectStore = transaction.objectStore(objectStoreName);
 
-    restaurants.forEach(function (restaurant) {
-        objectStore.put(restaurant);
-    });
+    if (restaurants != undefined) {
+        restaurants.forEach(function (restaurant) {
+            objectStore.put(restaurant);
+        });
+    }
     transaction.oncomplete = function () {
         console.info("Write complete");
     };
@@ -69,9 +71,14 @@ fetchFromDbById = (id) => {
     var transaction = db.transaction([objectStoreName], "readonly");
     var objectStore = transaction.objectStore(objectStoreName);
 
-    let data = objectStore.get(id - 1);
+    let data = objectStore.get(Number(id));
 
     data.onsuccess = function (e) {
+        console.log(e.target.result);
         return e.target.result;
+    };
+
+    data.onerror = function (e) {
+        console.log(e);
     }
 };

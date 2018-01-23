@@ -50,16 +50,12 @@ class DBHelper {
         xhr.onload = () => {
             if (xhr.status === 200 || xhr.status === 201) { // Got a success response from server!
                 const json = JSON.parse(xhr.responseText);
-                if (restaurant) { // Got the restaurant
+                if (json) { // Got the restaurant
                     callback(null, json);
                 } else { // Restaurant does not exist in the database
-                    callback('Restaurant does not exist', null);
+                    const json = fetchFromDbById(id);
+                    callback(null, json);
                 }
-            } else { // Oops!. Got an error from server.
-                const error = (`Request failed. Returned status of ${xhr.status}`);
-                // callback(error, null);
-                const json = fetchFromDbById(id);
-                callback(null, json);
             }
         };
         xhr.send();
